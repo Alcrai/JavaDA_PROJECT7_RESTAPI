@@ -14,9 +14,22 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/curvePoint/update/{id}(id=${curvePoint.id})}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of CurvePoint, there are 2 buttons: Update data and Cancel to the Curve Point
-			 -->
+			<div class="form-group" >
+				<label for="curveId">Curve Id</label>
+				<input type="number" th:field="*{curveId}" class="form-control" id="curveId" placeholder="Curve Id"/>
+				<p><span class="text-danger" th:text="${errorcurve}">Curve Error</span></p>
+			</div>
+			<div class="form-group">
+				<label for="term">Term</label>
+				<input type="number" th:field="*{term}" class="form-control" id="term" placeholder="Term"/>
+			</div>
+			<div class="form-group">
+				<label for="value">Value</label>
+				<input type="number" th:field="*{value}" class="form-control" id="value" placeholder="Value"/>
+			</div>
+			<button class="btn btn-danger" type="submit" name="action" value="cancel">Cancel</button>
+			<button class="btn btn-primary" type="submit" name="action" value="update">Update CurvePoint</button>
+
 		</form>
 	</div>
 

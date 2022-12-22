@@ -6,9 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,20 +24,20 @@ public class BildListServiceTest {
     private BidList bid;
 
     @BeforeEach
-    void initTest(){
+    public void initTest(){
         bidListService= new BidListService(bidListRepository);
         bid = new BidList("Account Test", "Type Test", 10d);
         bid.setBidListId(1);
     }
 
     @Test
-    void saveBidList(){
+    public void saveBidList(){
         when(bidListRepository.save(bid)).thenReturn(bid);
         assertThat(bidListService.save(bid)).isEqualTo(bid);
         verify(bidListRepository).save(bid);
     }
     @Test
-    void findAllTest(){
+    public void findAllTest(){
         List<BidList> bidList = new ArrayList<>();
         bidList.add(bid);
         when (bidListRepository.findAll()).thenReturn(bidList);
@@ -47,19 +45,19 @@ public class BildListServiceTest {
         verify(bidListRepository).findAll();
     }
     @Test
-    void deleteTest(){
+    public void deleteTest(){
         when(bidListRepository.findById(1)).thenReturn(Optional.of(bid));
         assertThat(bidListService.delete(1)).isEqualTo(bid);
         verify(bidListRepository).findById(1);
     }
     @Test
-    void findByIdTest(){
+    public void findByIdTest(){
         when(bidListRepository.findById(1)).thenReturn(Optional.of(bid));
         assertThat(bidListService.findById(1)).isEqualTo(bid);
         verify(bidListRepository).findById(1);
     }
     @Test
-    void updatetest(){
+    public void updatetest(){
         when(bidListRepository.save(bid)).thenReturn(bid);
         assertThat(bidListService.update(bid,1)).isEqualTo(bid);
         verify(bidListRepository).save(bid);
