@@ -1,4 +1,4 @@
-/*package com.nnk.springboot.configuration;
+package com.nnk.springboot.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
                 .dataSource(dataSource)
-                .usersByUsernameQuery("SELECT username, password FROM Users WHERE username=?")
+                .usersByUsernameQuery("SELECT username, password, enabled FROM Users WHERE username=?")
                 .authoritiesByUsernameQuery("SELECT username, role FROM Users WHERE username=?")
         ;
 
@@ -36,12 +36,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers
                         ("/css/**").permitAll()
                 .antMatchers("/*").hasAnyRole("ADMIN","USER")
+                .antMatchers("/").hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
+                .formLogin().loginPage("/").permitAll()
                 .and()
-                .logout()
+                .logout().invalidateHttpSession
+                        (true).clearAuthentication(true)
+                .logoutRequestMatcher
+                        (new AntPathRequestMatcher("/app-logout"))
+                .logoutSuccessUrl("/login")
                 .permitAll();
     }
 
-}*/
+}
