@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 @Data
 @Entity
-@Table(name = "rating")
+@Table(name = "Rating")
 public class Rating {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -22,4 +22,14 @@ public class Rating {
     private String fitchRating;
     @Column(name = "orderNumber")
     private int orderNumber;
+
+    public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {
+        this.moodysRating = moodysRating;
+        this.sandPRating = sandPRating;
+        this.fitchRating = fitchRating;
+        this.orderNumber = orderNumber;
+    }
+
+    public Rating() {
+    }
 }

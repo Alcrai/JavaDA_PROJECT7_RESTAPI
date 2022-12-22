@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "curvepoint")
+@Table(name = "Curvepoint")
 public class CurvePoint {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,4 +26,13 @@ public class CurvePoint {
     private double value;
     @Column(name="creationDate")
     private Timestamp creationDate;
+
+    public CurvePoint(int curveId, double term, double value) {
+        this.curveId = curveId;
+        this.term = term;
+        this.value = value;
+    }
+
+    public CurvePoint() {
+    }
 }

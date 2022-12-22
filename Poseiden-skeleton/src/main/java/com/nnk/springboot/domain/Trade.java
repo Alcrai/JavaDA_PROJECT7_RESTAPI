@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "trade")
+@Table(name = "Trade")
 public class Trade {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -55,4 +55,11 @@ public class Trade {
     @Column(name = "side")
     private String side;
 
+    public Trade(String account, String type) {
+        this.account = account;
+        this.type = type;
+    }
+
+    public Trade() {
+    }
 }
