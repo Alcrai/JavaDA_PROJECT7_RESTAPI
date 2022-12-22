@@ -32,7 +32,7 @@ public class RatingServiceTest {
     }
 
     @Test
-    public void saveBidList(){
+    public void saveTest(){
         when(ratingRepository.save(rating)).thenReturn(rating);
         assertThat(ratingService.save(rating)).isEqualTo(rating);
         verify(ratingRepository).save(rating);

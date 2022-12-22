@@ -45,9 +45,9 @@
 				<td th:text="${r.fitchRating}">FitchRating</td>
 				<td th:text="${r.orderNumber}">Order</td>
 				<td class="inline-block text-center">
-					<a th:href="@{'/rating/update/' + ${r.id}}" class="">Edit</a>
+					<a th:href="@{'/rating/update/' + ${r.id}}">Edit</a>
 					<span>|</span>
-					<a th:href="@{'/rating/delete/' + ${r.id}}" id="btnDelete" class="">Delete</a>
+					<a th:href="@{'/rating/delete/' + ${r.id}}" id="btnDelete">Delete</a>
 				</td>
 			</tr>
 			</tbody>
