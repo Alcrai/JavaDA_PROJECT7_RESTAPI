@@ -73,7 +73,6 @@ public class BidListController {
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,@RequestParam(value="action",required = true)String action,
                              BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
         String redirect = "";
         if (bidList.getAccount().isBlank()||bidList.getType().isBlank()){
             if (bidList.getAccount().isBlank()){

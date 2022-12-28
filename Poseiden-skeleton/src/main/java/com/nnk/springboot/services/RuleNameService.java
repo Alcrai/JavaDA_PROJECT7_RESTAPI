@@ -35,7 +35,9 @@ public class RuleNameService {
 
     public RuleName delete(Integer id) {
         RuleName ruleName = ruleNameRepository.findById(id).get();
-        ruleNameRepository.delete(ruleName);
+        if (ruleName != null) {
+            ruleNameRepository.delete(ruleName);
+        }
         return ruleName;
     }
 }

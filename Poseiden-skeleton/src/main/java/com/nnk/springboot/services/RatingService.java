@@ -36,7 +36,9 @@ public class RatingService {
 
     public Rating delete(Integer id) {
         Rating rating = ratingRepository.findById(id).get();
-        ratingRepository.delete(rating);
+        if(rating!=null) {
+            ratingRepository.delete(rating);
+        }
         return rating;
     }
 }

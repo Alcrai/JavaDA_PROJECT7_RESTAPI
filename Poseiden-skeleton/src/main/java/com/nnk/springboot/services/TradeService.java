@@ -35,7 +35,9 @@ public class TradeService {
 
     public Trade delete(Integer id) {
         Trade trade = tradeRepository.findById(id).get();
-        tradeRepository.delete(trade);
+        if(trade!=null) {
+            tradeRepository.delete(trade);
+        }
         return trade;
     }
 }

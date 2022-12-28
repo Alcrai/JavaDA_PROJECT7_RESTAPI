@@ -1,8 +1,6 @@
 package com.nnk.springboot.api.services;
 
-import com.nnk.springboot.api.domain.Trade;
 import com.nnk.springboot.api.domain.User;
-import com.nnk.springboot.api.repositories.TradeRepository;
 import com.nnk.springboot.api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -27,7 +27,9 @@ public class CurvePointService {
 
     public CurvePoint delete(Integer id) {
         CurvePoint curve = curvePointRepository.findById(id).get();
-        curvePointRepository.delete(curve);
+        if(curve!=null) {
+            curvePointRepository.delete(curve);
+        }
         return curve;
     }
 
