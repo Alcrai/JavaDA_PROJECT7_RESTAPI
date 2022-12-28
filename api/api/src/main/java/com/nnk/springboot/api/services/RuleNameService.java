@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RuleNameService {
@@ -24,8 +25,8 @@ public class RuleNameService {
         return ruleNameRepository.save(ruleName);
     }
 
-    public RuleName findById(Integer id) {
-        return ruleNameRepository.findById(id).get();
+    public Optional<RuleName> findById(Integer id) {
+        return ruleNameRepository.findById(id);
     }
 
     public RuleName update(RuleName ruleName, Integer id) {

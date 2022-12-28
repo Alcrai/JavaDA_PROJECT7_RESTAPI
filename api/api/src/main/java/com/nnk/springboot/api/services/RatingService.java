@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RatingService {
@@ -24,8 +25,8 @@ public class RatingService {
         return ratingRepository.save(rating);
     }
 
-    public Rating findById(Integer id) {
-        return ratingRepository.findById(id).get();
+    public Optional<Rating> findById(Integer id) {
+        return ratingRepository.findById(id);
     }
 
     public Rating update(Rating rating, Integer id) {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CurvePointService {
@@ -31,8 +32,8 @@ public class CurvePointService {
         return curve;
     }
 
-    public CurvePoint findById(Integer id) {
-        return curvePointRepository.findById(id).get();
+    public Optional<CurvePoint> findById(Integer id) {
+        return curvePointRepository.findById(id);
     }
 
     public CurvePoint update(CurvePoint curvePoint, Integer id) {

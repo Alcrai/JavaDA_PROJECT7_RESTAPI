@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TradeService {
@@ -24,8 +25,8 @@ public class TradeService {
         return tradeRepository.save(trade);
     }
 
-    public Trade findById(Integer id) {
-        return tradeRepository.findById(id).get();
+    public Optional<Trade> findById(Integer id) {
+        return tradeRepository.findById(id);
     }
 
     public Trade update(Trade trade, Integer id) {

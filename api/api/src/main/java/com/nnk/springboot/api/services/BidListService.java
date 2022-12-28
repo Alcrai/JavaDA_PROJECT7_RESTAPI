@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BidListService {
@@ -21,7 +22,7 @@ public class BidListService {
         return bid;
     }
 
-    public List<BidList> findAll() {
+    public Iterable<BidList> findAll() {
         return bidListRepository.findAll();
     }
 
@@ -31,8 +32,8 @@ public class BidListService {
         return bid;
     }
 
-    public BidList findById(Integer id) {
-        return bidListRepository.findById(id).get();
+    public Optional<BidList> findById(Integer id) {
+        return bidListRepository.findById(id);
     }
 
     public BidList update(BidList bidList,int id) {
