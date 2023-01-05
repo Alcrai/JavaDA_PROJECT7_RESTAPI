@@ -10,7 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
-
+/**
+ * Spring Security config
+ *
+ */
 @Configuration
 @EnableWebSecurity
 

@@ -3,8 +3,10 @@ package com.nnk.springboot.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.sql.Timestamp;
+/**
+ * RuleName Entity
+ *
+ */
 @Data
 @Entity
 @Table(name = "Rulename")

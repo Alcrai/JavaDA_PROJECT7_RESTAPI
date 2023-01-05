@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RatingController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.controllers</a> &gt; <span class="el_source">RatingController.java</span></div><h1>RatingController.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.controllers;
+
+import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.repositories.RatingRepository;
+import com.nnk.springboot.services.RatingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@Controller
+public class RatingController {
+    @Autowired
+    private RatingService ratingService;
+
+<span class="fc" id="L21">    public RatingController(RatingService ratingService) {</span>
+<span class="fc" id="L22">        this.ratingService = ratingService;</span>
+<span class="fc" id="L23">    }</span>
+
+    @RequestMapping(&quot;/rating/list&quot;)
+    public String home(Model model)
+    {
+<span class="fc" id="L28">        List&lt;Rating&gt; ratingList = ratingService.findAll();</span>
+<span class="fc" id="L29">        model.addAttribute(&quot;ratings&quot;, ratingList);</span>
+<span class="fc" id="L30">        return &quot;rating/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/rating/add&quot;)
+    public String addRatingForm(Rating rating, @RequestParam(value = &quot;errormoodys&quot;,defaultValue = &quot;&quot;)String errormoodys,
+                                @RequestParam(value = &quot;errorsand&quot;,defaultValue = &quot;&quot;)String errorsand,
+                                @RequestParam(value = &quot;errorfitch&quot;,defaultValue = &quot;&quot;)String errorfitch,Model model) {
+<span class="fc" id="L37">        model.addAttribute(&quot;errormoodys&quot;,errormoodys);</span>
+<span class="fc" id="L38">        model.addAttribute(&quot;errorsand&quot;,errorsand);</span>
+<span class="fc" id="L39">        model.addAttribute(&quot;errorfitch&quot;,errorfitch);</span>
+<span class="fc" id="L40">        return &quot;rating/add&quot;;</span>
+    }
+
+    @PostMapping(&quot;/rating/validate&quot;)
+    public String validate(@Valid Rating rating, @RequestParam(value=&quot;action&quot;,required = true)String action, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+<span class="fc" id="L45">        String redirect = &quot;&quot;;</span>
+<span class="pc bpc" id="L46" title="2 of 6 branches missed.">        if (rating.getMoodysRating().isBlank()||rating.getSandPRating().isBlank()||rating.getFitchRating().isBlank()){</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">            if (rating.getMoodysRating().isBlank()){</span>
+<span class="fc" id="L48">                redirectAttributes.addAttribute(&quot;errormoodys&quot;,&quot;Moodys Rating is mandatory&quot;);</span>
+            }
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">            if (rating.getSandPRating().isBlank()){</span>
+<span class="fc" id="L51">                redirectAttributes.addAttribute(&quot;errorsand&quot;,&quot;Sand P Rating is mandatory&quot;);</span>
+            }
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">            if (rating.getFitchRating().isBlank()){</span>
+<span class="fc" id="L54">                redirectAttributes.addAttribute(&quot;errorfitch&quot;,&quot;Fitch rating is mandatory&quot;);</span>
+            }
+<span class="fc" id="L56">            return &quot;redirect:/rating/add&quot;;</span>
+        }else {
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">            if (action.equals(&quot;cancel&quot;)){</span>
+<span class="fc" id="L59">                rating.setMoodysRating(&quot;&quot;);</span>
+<span class="fc" id="L60">                rating.setSandPRating(&quot;&quot;);</span>
+<span class="fc" id="L61">                rating.setFitchRating(&quot;&quot;);</span>
+<span class="fc" id="L62">                rating.setOrderNumber(0);</span>
+<span class="fc" id="L63">                return  &quot;rating/add&quot;;</span>
+            }
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if (action.equals(&quot;add&quot;)){</span>
+<span class="nc" id="L66">                ratingService.save(rating);</span>
+<span class="nc" id="L67">                redirect =&quot;redirect:/rating/list&quot;;</span>
+            }
+        }
+<span class="nc" id="L70">        return redirect;</span>
+    }
+
+    @GetMapping(&quot;/rating/update/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, @RequestParam(value = &quot;errormoodys&quot;,defaultValue = &quot;&quot;)String errormoodys,
+                                 @RequestParam(value = &quot;errorsand&quot;,defaultValue = &quot;&quot;)String errorsand,
+                                 @RequestParam(value = &quot;errorfitch&quot;,defaultValue = &quot;&quot;)String errorfitch, Model model) {
+<span class="fc" id="L77">        Rating rating = ratingService.findById(id);</span>
+<span class="fc" id="L78">        model.addAttribute(&quot;rating&quot;,rating);</span>
+<span class="fc" id="L79">        model.addAttribute(&quot;errormoodys&quot;,errormoodys);</span>
+<span class="fc" id="L80">        model.addAttribute(&quot;errorsand&quot;,errorsand);</span>
+<span class="fc" id="L81">        model.addAttribute(&quot;errorfitch&quot;,errorfitch);</span>
+<span class="fc" id="L82">        return &quot;rating/update&quot;;</span>
+    }
+
+    @PostMapping(&quot;/rating/update/{id}&quot;)
+    public String updateRating(@PathVariable(&quot;id&quot;) Integer id, @Valid Rating rating,@RequestParam(value=&quot;action&quot;,required = true)String action,
+                             BindingResult result, Model model,RedirectAttributes redirectAttributes) {
+<span class="fc" id="L88">        String redirect = &quot;&quot;;</span>
+<span class="pc bpc" id="L89" title="2 of 6 branches missed.">        if (rating.getMoodysRating().isBlank()||rating.getSandPRating().isBlank()||rating.getFitchRating().isBlank()){</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">            if (rating.getMoodysRating().isBlank()){</span>
+<span class="fc" id="L91">                redirectAttributes.addAttribute(&quot;errormoodys&quot;,&quot;Moodys Rating is mandatory&quot;);</span>
+            }
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">            if (rating.getSandPRating().isBlank()){</span>
+<span class="fc" id="L94">                redirectAttributes.addAttribute(&quot;errorsand&quot;,&quot;Sand P Rating is mandatory&quot;);</span>
+            }
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">            if (rating.getFitchRating().isBlank()){</span>
+<span class="fc" id="L97">                redirectAttributes.addAttribute(&quot;errorfitch&quot;,&quot;Fitch rating is mandatory&quot;);</span>
+            }
+<span class="fc" id="L99">            return &quot;redirect:/rating/update/{id}&quot;;</span>
+        }else {
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">            if (action.equals(&quot;cancel&quot;)){</span>
+<span class="fc" id="L102">                return  &quot;redirect:/rating/update/&quot;+id;</span>
+            }
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (action.equals(&quot;update&quot;)){</span>
+<span class="nc" id="L105">                ratingService.update(rating,id);</span>
+<span class="nc" id="L106">                redirect =&quot;redirect:/rating/list&quot;;</span>
+            }
+        }
+<span class="nc" id="L109">        return redirect;</span>
+    }
+
+    @GetMapping(&quot;/rating/delete/{id}&quot;)
+    public String deleteRating(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="fc" id="L114">        ratingService.delete(id);</span>
+<span class="fc" id="L115">        return &quot;redirect:/rating/list&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

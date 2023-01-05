@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Trade Service
+ * this class makes the link between the controller and the repository
+ *
+ */
 @Service
 public class TradeService {
     @Autowired

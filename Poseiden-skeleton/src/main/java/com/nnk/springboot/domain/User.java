@@ -2,7 +2,10 @@ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
+/**
+ * User Entity
+ *
+ */
 @Entity
 @Table(name = "Users")
 public class User {
@@ -23,6 +26,15 @@ public class User {
     @Column(name="role")
     private String role;
 
+    public User() {
+    }
+
+    public User(String username, String password, String fullname, String role) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.role = role;
+    }
 
     public Integer getId() {
         return id;

@@ -1,15 +1,13 @@
 package com.nnk.springboot.domain;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.sql.Timestamp;
+/**
+ * BidList Entity
+ *
+ */
 @Data
 @Entity
 @Table(name = "Bidlist")

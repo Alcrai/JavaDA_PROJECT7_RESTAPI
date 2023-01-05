@@ -3,9 +3,10 @@ package com.nnk.springboot.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
+/**
+ * Rating Entity
+ *
+ */
 @Data
 @Entity
 @Table(name = "Rating")

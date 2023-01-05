@@ -3,10 +3,16 @@ package com.nnk.springboot.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+/**
+ * home Controller
+ * this controller manages the display Home and admin/home
+ */
 @Controller
 public class HomeController
 {
+	public HomeController() {
+	}
+
 	@RequestMapping("/")
 	public String home(Model model)
 	{
